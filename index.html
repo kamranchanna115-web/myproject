@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ARRAX — dark gothic custom streetwear.">
+<title>ARRAX — Wear Your Dark Side</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="announcement">FREE SHIPPING ON ORDERS OVER $75 <span>•</span> CUSTOM PRINTS AVAILABLE</div>
+
+<header class="site-header">
+  <a href="#home" class="logo">ARRAX<span>†</span></a>
+  <nav>
+    <a href="#shop">Shop</a><a href="#customize">Customize</a><a href="#collections">Collections</a><a href="#about">About</a>
+  </nav>
+  <div class="header-actions">
+    <button aria-label="Search" onclick="toggleSearch()">⌕</button>
+    <button aria-label="Account" onclick="showAccount()">♙</button>
+    <button aria-label="Wishlist" onclick="showWishlist()">♡<b id="wishCount">0</b></button>
+    <button aria-label="Cart" onclick="openCart()">Bag <b id="cartCount">0</b></button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<div id="searchBar" class="search-bar">
+  <input id="searchInput" oninput="renderProducts()" placeholder="Search the darkness...">
+</div>
+
+<main id="home">
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">EST. 2026 • DARK STREETWEAR</p>
+    <h1>WEAR YOUR<br><em>DARK SIDE.</em></h1>
+    <p>Custom streetwear built for those who don't follow the ordinary.</p>
+    <div class="hero-buttons"><a class="btn primary" href="#shop">SHOP THE DROP</a><a class="btn ghost" href="#customize">CUSTOMIZE YOUR TEE</a></div>
+  </div>
+  <div class="hero-mark">†</div>
+</section>
+
+<section class="ticker"><span>ARRAX</span><span>NO ORDINARY CLOTHING</span><span>MAKE YOUR MARK</span><span>ARRAX</span><span>NO ORDINARY CLOTHING</span></section>
+
+<section id="shop" class="section">
+  <div class="section-head">
+    <div><p class="eyebrow">THE COLLECTION</p><h2>THE LATEST <em>DROP</em></h2></div>
+    <a href="#shop" class="text-link">VIEW ALL →</a>
+  </div>
+  <div class="filters">
+    <button class="filter active" data-cat="all">ALL</button>
+    <button class="filter" data-cat="new">NEW ARRIVALS</button>
+    <button class="filter" data-cat="gothic">GOTHIC</button>
+    <button class="filter" data-cat="custom">CUSTOM</button>
+    <button class="filter" data-cat="sale">SALE</button>
+  </div>
+  <div id="productGrid" class="product-grid"></div>
+</section>
+
+<section id="collections" class="collection-banner">
+  <div><p class="eyebrow">THE BLACK LABEL</p><h2>NOT MADE<br>FOR EVERYONE.</h2><p>Heavyweight silhouettes. Distorted graphics. Limited runs.</p><a href="#shop" class="btn primary">EXPLORE COLLECTION</a></div>
+</section>
+
+<section id="customize" class="section custom-section">
+  <div class="section-head"><div><p class="eyebrow">MAKE IT YOURS</p><h2>CREATE YOUR <em>OWN.</em></h2></div></div>
+  <div class="customizer">
+    <div class="tee-stage">
+      <div class="tee"><div id="printPreview">ARRAX</div></div>
+      <p class="stage-note">LIVE PREVIEW • FRONT PRINT</p>
+    </div>
+    <div class="custom-controls">
+      <label>YOUR TEXT <input id="customText" maxlength="20" value="ARRAX" oninput="updatePreview()"></label>
+      <label>PRINT COLOR
+        <select id="printColor" onchange="updatePreview()"><option value="#e7e2d8">Bone</option><option value="#9b1c31">Crimson</option><option value="#111111">Black</option></select>
+      </label>
+      <label>SHIRT COLOR
+        <div class="swatches"><button class="swatch black active" onclick="setShirt('#0b0b0b',this)"></button><button class="swatch stone" onclick="setShirt('#4b4a46',this)"></button><button class="swatch bone" onclick="setShirt('#ddd7cb',this)"></button></div>
+      </label>
+      <label>SIZE
+        <div class="sizes"><button onclick="pickSize(this)">S</button><button class="selected" onclick="pickSize(this)">M</button><button onclick="pickSize(this)">L</button><button onclick="pickSize(this)">XL</button><button onclick="pickSize(this)">2XL</button></div>
+      </label>
+      <label>UPLOAD ARTWORK <input type="file" accept="image/*" onchange="previewUpload(event)"></label>
+      <div class="custom-price"><span>Custom Tee</span><strong>$39.00</strong></div>
+      <button class="btn primary full" onclick="addCustom()">ADD CUSTOM TEE TO BAG</button>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div><span>✦</span><h3>PREMIUM COTTON</h3><p>Heavyweight, soft and built to last.</p></div>
+  <div><span>✧</span><h3>CUSTOM PRINTING</h3><p>Your design, printed with precision.</p></div>
+  <div><span>†</span><h3>MADE FOR YOU</h3><p>Small-batch pieces with character.</p></div>
+  <div><span>◇</span><h3>SECURE CHECKOUT</h3><p>Safe payments and protected orders.</p></div>
+</section>
+
+<section class="reviews section">
+  <p class="eyebrow">FROM THE CULT</p><h2>THEY <em>GET IT.</em></h2>
+  <div class="review-grid"><article><div>★★★★★</div><p>“Exactly the aesthetic I was looking for. The heavyweight tee feels incredible.”</p><strong>— ALEX R.</strong></article><article><div>★★★★★</div><p>“The customizer made it ridiculously easy to turn my sketch into a real shirt.”</p><strong>— MARA K.</strong></article><article><div>★★★★★</div><p>“Dark, clean, different. Arrax is now my go-to streetwear brand.”</p><strong>— JORDAN T.</strong></article></div>
+</section>
+
+<section class="newsletter">
+  <p class="eyebrow">JOIN THE DARK SIDE</p><h2>ENTER THE <em>INNER CIRCLE.</em></h2><p>Get early access to new drops, limited designs and private offers.</p>
+  <form onsubmit="subscribe(event)"><input type="email" required placeholder="Your email address"><button class="btn primary">JOIN ARRAX</button></form>
+</section>
+
+<section id="about" class="about section">
+  <div><p class="eyebrow">ABOUT ARRAX</p><h2>BUILT FOR THE<br><em>UNORDINARY.</em></h2></div>
+  <div><p>ARRAX is a custom streetwear label for people who treat clothing as identity. We combine gothic visual language, heavyweight essentials and personal artwork to make pieces that feel like they belong to you.</p><p class="muted">Limited runs. Custom pieces. No ordinary uniforms.</p></div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand"><a class="logo">ARRAX<span>†</span></a><p>Wear your dark side.</p></div>
+  <div><h4>SHOP</h4><a href="#shop">All T-Shirts</a><a href="#shop">New Arrivals</a><a href="#shop">Gothic Collection</a><a href="#customize">Custom T-Shirts</a></div>
+  <div><h4>HELP</h4><a href="#faq" onclick="showPage('FAQ')">FAQ</a><a href="#size" onclick="showPage('Size Guide')">Size Guide</a><a href="#shipping" onclick="showPage('Shipping')">Shipping</a><a href="#returns" onclick="showPage('Returns')">Returns</a></div>
+  <div><h4>LEGAL</h4><a onclick="showPage('Privacy Policy')">Privacy</a><a onclick="showPage('Terms & Conditions')">Terms</a><a onclick="showPage('Refund Policy')">Refund Policy</a><a onclick="showPage('Contact')">Contact</a></div>
+  <div class="copyright">© 2026 ARRAX. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<div id="drawerBackdrop" class="backdrop" onclick="closeDrawers()"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-head"><h2>YOUR BAG</h2><button onclick="closeDrawers()">×</button></div>
+  <div id="cartItems"></div>
+  <div class="cart-bottom"><div><span>Subtotal</span><strong id="cartTotal">$0.00</strong></div><p>Shipping and taxes calculated at checkout.</p><button class="btn primary full" onclick="checkout()">CHECKOUT</button></div>
+</aside>
+
+<div id="modal" class="modal-wrap" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="modal-close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<div id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
